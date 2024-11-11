@@ -78,6 +78,39 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<!-- Including additional test directories for Maven Surefire Plugin -->
+					<testSourceDirectory>src/test/unit</testSourceDirectory>
+					<additionalClasspathElements>
+						<additionalClasspathElement>src/test/intg</additionalClasspathElement>
+					</additionalClasspathElements>
+				</configuration>
+			</plugin>
+
+			<!-- Optional: Use the Failsafe plugin for integration tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includes>
+						<include>**/intg/**/*IT.java</include> <!-- Assumes integration tests end with 'IT' -->
+					</includes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
